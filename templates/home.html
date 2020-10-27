@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review</title>
+</head>
+<body>
+    <div id="container">
+        <h1 style="color: #017ebc">Welcome</h1>
+        <div>
+            <textarea placeholder="Please enter your feedback" rows="5" id="review"></textarea>
+        </div>
+        <button type="button" id="submit_button">Submit</button>
+        <p id="result"></p>
+    </div>
+</body>
+</html>
+<script src="/static/js/jquery/jquery.js"></script>
+<script>
+    $('#submit_button').click(function (){
+        let review = $('#review').val()
+        $.post('/api/review',
+            {
+                review: review
+            },
+            function (result) {
+                if (result === 'Positive'){
+                    document.getElementById('result').style.color = 'crimson'
+                } else {
+                    document.getElementById('result').style.color = 'black'
+                }
+                document.getElementById('result').innerHTML = result
+        })
+    })
+
+</script>
+<style>
+    #container {
+        margin-top: 100px;
+        width: 100%;
+        text-align: center;
+    }
+
+    #submit_button{
+        background-color: dodgerblue;
+        border-color: dodgerblue;
+        color: white;
+        font-size: 16px;
+    }
+
+    #review {
+        width: 50%;
+        font-size: 16px;
+    }
+
+    #result {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+</style>
