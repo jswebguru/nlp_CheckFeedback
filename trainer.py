@@ -97,10 +97,10 @@ class Feedback:
 
     def train_binary_classification(self):
         train_x_data, train_y_data = self.extract_features()
-        self.classifier.train_best_model(model_name="RBF SVM", x_data=train_x_data, y_data=train_y_data)
-        # max_model = models[accuracies.index(max(accuracies))]
-        # print("INFO:: Best model:", max_model)
-        # self.classifier.train_best_model(model_name=max_model, x_data=train_x_data, y_data=train_y_data)
+        models, accuracies = self.classifier.train_best_model(model_name="RBF SVM", x_data=train_x_data, y_data=train_y_data)
+        max_model = models[accuracies.index(max(accuracies))]
+        print("INFO:: Best model:", max_model)
+        self.classifier.train_best_model(model_name=max_model, x_data=train_x_data, y_data=train_y_data)
 
         return
 
@@ -112,13 +112,13 @@ class Feedback:
                 sentences.append(sentence.lower())
         text_feature = self.calculate_text_feature(self.extract_feature_sentence(text=sentences))
         predict_result = self.binary_model.predict(np.array(text_feature).reshape(1, -1))
-        # if predict_result[0] == 'Pos':
-        #     result = 'Positive'
-        # else:
-        #     result = 'Negative'
-        # print(f"Result: {predict_result[0]}")
+        if predict_result[0] == 'Pos':
+            result = 'Positive'
+        else:
+            result = 'Negative'
+        print(f"Result: {predict_result[0]}")
 
-        return predict_result[0]
+        return result
 
 
 if __name__ == '__main__':
