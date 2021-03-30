@@ -5,7 +5,7 @@ This is a NLP project to check whether the feedback is positive or not.
 
 ##Install Dependencies 
 ```command
-    git clone https://github.com/iotfan90/nlp_CheckFeedback.git
+    git clone https://github.com/jswebguru/nlp_CheckFeedback.git
     python3 -m pip install -r requirements.txt
     python3 -m nltk.downloader all
     python3 -m spacy download en_core_web_sm
